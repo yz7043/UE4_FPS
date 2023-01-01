@@ -26,6 +26,18 @@ protected:
 	// Called for left / right inputs
 	void MoveRight(float value);
 
+	/**
+	* Called via input turn at a given rate
+	* @param Rate: This is a normalized rate, i.e. 1.0 means 100% of desired turn rate
+	*/
+	void TurnAtRate(float rate);
+
+
+	/**
+	* Called via input to look up/downd at a given rate
+	* @param Rate: This is a normalized rate, i.e. 1.0 means 100% of desired rate
+	*/
+	void LookUpAtRate(float rate);
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -41,6 +53,14 @@ private:
 	/** Camera following the character */
 	UPROPERTY(VisibleAnyWhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
+
+	// Base turn rate deg/sec
+	UPROPERTY(VisibleAnyWhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+	float BaseTurnRate;
+
+	// Base look up/down rate deg/sec
+	UPROPERTY(VisibleAnyWhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+	float BaseLookUpRate;
 
 public:
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
